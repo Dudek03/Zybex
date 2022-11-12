@@ -1,11 +1,13 @@
 import { position } from "./interfaces"
 import { createImage } from "./utilities"
 class Map {
+
     stageNum: number
     position: position
     image: HTMLImageElement
     context: CanvasRenderingContext2D | null
     canvas: HTMLCanvasElement
+
     constructor(stageNum: number, position: position, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D | null) {
         this.stageNum = stageNum
         this.position = position

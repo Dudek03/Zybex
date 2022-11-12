@@ -24,10 +24,17 @@ class Game {
 
     render(): void {
         requestAnimationFrame(() => this.render())
+        this.context!.fillStyle = "black"
+        this.context!.fillRect(0, 0, this.canvas.width, this.canvas.height)
         //rendering
         this.map.draw()
+        this.player.activeProjectileArray.forEach(projectile => {
+            projectile.update()
+            this.player.activeProjectileArray = this.player.activeProjectileArray.filter(e =>
+                e.position.x > 0 && e.position.y > 0 && e.position.x <= this.canvas.width / 2 && e.position.y <= this.canvas.height / 2
+            )
+        })
         this.player.update()
-        this.player.activeProjectileArray.forEach(projectile => projectile.update())
         //moving map
         this.map.position.x -= this.speed
         this.player.referencePoint -= this.speed
