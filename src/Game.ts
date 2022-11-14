@@ -28,12 +28,10 @@ class Game {
         this.context!.fillRect(0, 0, this.canvas.width, this.canvas.height)
         //rendering
         this.map.draw()
-        this.player.activeProjectileArray.forEach(projectile => {
-            projectile.update()
-            this.player.activeProjectileArray = this.player.activeProjectileArray.filter(e =>
-                e.position.x > 0 && e.position.y > 0 && e.position.x <= this.canvas.width / 2 && e.position.y <= this.canvas.height / 2
-            )
-        })
+        this.player.activeProjectileArray.forEach(projectile => projectile.update())
+        this.player.activeProjectileArray = this.player.activeProjectileArray.filter(e =>
+            e.position.x > 0 && e.position.y > 0 && e.position.x <= this.canvas.width / 2 && e.position.y <= this.canvas.height / 2
+        )
         this.player.update()
         //moving map
         this.map.position.x -= this.speed
@@ -42,14 +40,6 @@ class Game {
         this.player.velocity.x = 0
         this.player.velocity.y = 0
 
-        if (this.player.keys.a.pressed && this.player.lastKeyHorizontal === 'a')
-            this.player.velocity.x = -5
-        else if (this.player.keys.d.pressed && this.player.lastKeyHorizontal === 'd')
-            this.player.velocity.x = 5
-        if (this.player.keys.w.pressed && this.player.lastKeyVertical === 'w')
-            this.player.velocity.y = -5
-        else if (this.player.keys.s.pressed && this.player.lastKeyVertical === 's')
-            this.player.velocity.y = 5
     }
 
 }

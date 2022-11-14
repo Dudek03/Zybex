@@ -1,7 +1,7 @@
-import { position, dimensions } from "./interfaces"
-import Character from "./AbstractClass"
+import { position, dimensions, fireMode } from "./interfaces"
+import Entity from "./Entity"
 import Projectile from "./Projectile"
-class Player extends Character {
+class Player extends Entity {
 
     keys: { a: { pressed: boolean }; d: { pressed: boolean }; w: { pressed: boolean }; s: { pressed: boolean } }
     lastKeyHorizontal: string
@@ -13,8 +13,8 @@ class Player extends Character {
     referencePoint: number
     distanceFromMap: number
     activeProjectileArray: Projectile[]
-    presentShootingMode: number;
-    fireModes: { id: number; picked: boolean; active: boolean; delay: number; projectilesArray: { position: { x: number; y: number; }; dimensions: { width: number; height: number; }; direction: { x: number; y: number; }; dmg: number; owner: string; speed: { vX: number; vY: number; }; }[]; }[];
+    presentShootingMode: number
+    fireModes: fireMode[]
 
     constructor(dimensions: dimensions, hp: number, position: position, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D | null) {
         super(dimensions, hp, position, ctx)
@@ -135,11 +135,12 @@ class Player extends Character {
     }
 
     switchToNextShootingMode() {
-        if (this.presentShootingMode + 1 > this.fireModes.length) {
-            this.presentShootingMode = 1
-        }
-        else this.presentShootingMode += 1
-        console.log(this.presentShootingMode)
+        do {
+            if (this.presentShootingMode + 1 > this.fireModes.length) {
+                this.presentShootingMode = 1
+            }
+            else this.presentShootingMode += 1
+        } while (!this.fireModes[this.presentShootingMode - 1].picked)
         this.fireModes.forEach(e => {
             e.active = false
             if (e.id == this.presentShootingMode)
@@ -149,22 +150,33 @@ class Player extends Character {
     }
 
     attack(): void {
-        while (this.isAttacking) {
-            let activeMode = this.fireModes.find(e => e.active == true)
-            let newTimeStamp = Date.now()
-            if (newTimeStamp - this.lastAttackTimestamp < activeMode!.delay)
-                return
-            activeMode!.projectilesArray.forEach(projectile => {
-                projectile.position = { x: this.position.x + this.dimensions.width / 2, y: this.position.y + this.dimensions.height / 2 - projectile.dimensions.height / 2 }
-                this.activeProjectileArray.push(new Projectile(projectile, this.ctx))
-            })
-            this.lastAttackTimestamp = newTimeStamp
-        }
+        if (!this.isAttacking) return
+        let activeMode = this.fireModes.find(e => e.active == true)
+        let newTimeStamp = Date.now()
+        if (newTimeStamp - this.lastAttackTimestamp < activeMode!.delay)
+            return
+        activeMode!.projectilesArray.forEach(projectile => {
+            projectile.position = { x: this.position.x + this.dimensions.width / 2, y: this.position.y + this.dimensions.height / 2 - projectile.dimensions.height / 2 }
+            this.activeProjectileArray.push(new Projectile(projectile, this.ctx))
+        })
+        this.lastAttackTimestamp = newTimeStamp
+
     }
 
     update(): void {
         this.distanceFromMap = Math.abs(this.referencePoint) + this.position.x // setting distance from starting x point of image
         this.draw()
+        this.attack()
+        //movement
+        if (this.keys.a.pressed && this.lastKeyHorizontal === 'a')
+            this.velocity.x = -5
+        else if (this.keys.d.pressed && this.lastKeyHorizontal === 'd')
+            this.velocity.x = 5
+        if (this.keys.w.pressed && this.lastKeyVertical === 'w')
+            this.velocity.y = -5
+        else if (this.keys.s.pressed && this.lastKeyVertical === 's')
+            this.velocity.y = 5
+
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
         if (this.position.x <= 0) {

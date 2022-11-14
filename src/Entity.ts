@@ -1,5 +1,5 @@
 import { position, dimensions } from "./interfaces"
-class Character {
+abstract class Entity {
     dimensions: dimensions
     hp: number
     position: position
@@ -15,4 +15,4 @@ class Character {
         this.ctx!.fillRect(this.position.x, this.position.y, this.dimensions.width, this.dimensions.height)
     }
 }
-export default Character
+export default Entity
