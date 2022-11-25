@@ -1,4 +1,5 @@
 import { position, dimensions } from "./interfaces"
+import Game from "./Game";
 class Projectile {
 
     position: position
@@ -26,8 +27,8 @@ class Projectile {
 
     update(): void {
         this.draw()
-        this.position.x += this.direction.x * this.speed.vX
-        this.position.y += this.direction.y * this.speed.vY
+        this.position.x += this.direction.x * this.speed.vX * Game.deltaTime
+        this.position.y += this.direction.y * this.speed.vY * Game.deltaTime
     }
 }
 export default Projectile

@@ -12,12 +12,12 @@ class Enemy extends Entity {
         super(data.dimensions, data.hp, data.position, data.ctx)
         this.attackInfo = data.attack
         this.isDropping = data.isDropping
-        this.lastAttackTimestamp = Date.now() - 1000
+        this.lastAttackTimestamp = performance.now()
         this.activeProjectileArray = []
     }
 
     attack(): void {
-        let newTimeStamp = Date.now()
+        let newTimeStamp = performance.now()
         if (newTimeStamp - this.lastAttackTimestamp < this.attackInfo.delay)
             return
         this.attackInfo.projectilesArray.forEach(projectile => {
@@ -27,7 +27,11 @@ class Enemy extends Entity {
         this.lastAttackTimestamp = newTimeStamp
     }
 
-    update() {
+    test() {
+        console.log(this.dimensions.width)
+    }
+
+    update(): void {
         this.draw()
         this.attack()
 

@@ -1,7 +1,8 @@
 import Player from "./Player"
 import Map from "./Map"
 import Enemy from "./Enemy"
-import { dimensions, position, attack } from "./interfaces"
+import { enemyData } from "./interfaces"
+import Game from "./Game";
 
 class Level {
 
@@ -12,8 +13,9 @@ class Level {
     map: Map
     speed: number
     isBossDead: boolean
-    levelsInfo: { levelID: number; hordesArray: { pattern: (x: number) => number; enemiesArray: { dimensions: dimensions; hp: number; position: position; ctx: CanvasRenderingContext2D | null; attack: attack; isDropping: boolean }[] }[]; boss: { pattern: (x: number) => number; view: { dimensions: dimensions; hp: number; position: position; ctx: CanvasRenderingContext2D | null; attack: attack; isDropping: boolean } } }[]
-
+    levelsInfo:  { hordesArray: { pattern: (x: number) => number; enemiesArray: enemyData[] }[]; boss: { pattern: (x: number) => number; view: enemyData[] }; } []
+    currentLvlData: { hordesArray: { pattern: (x: number) => number; enemiesArray: enemyData[]; }[]; boss: { pattern: (x: number) => number; view: enemyData[]; }; };
+    hordeID: number;
 
     constructor(lvNum: number, speed: number, canvas: HTMLCanvasElement, context: CanvasRenderingContext2D | null) {
         this.lvNum = lvNum
@@ -24,8 +26,7 @@ class Level {
         this.context = context
         this.isBossDead = false
         this.levelsInfo = [
-            {
-                levelID: 1,
+             {
                 hordesArray: [
                     {
                         pattern: (x: number): number => { return Math.sin(x) },
@@ -44,10 +45,13 @@ class Level {
                 ],
                 boss: {
                     pattern: (x: number): number => { return Math.sin(x) },
-                    view: { dimensions: { width: 40, height: 40 }, hp: 10, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: false }
+                    view: [{ dimensions: { width: 40, height: 40 }, hp: 10, position: { x: this.canvas.width / 2 - 40, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: false }]
                 }
             }
         ]
+        this.currentLvlData = this.levelsInfo[lvNum - 1]
+        this.hordeID = 0
+        
     }
 
 
@@ -59,8 +63,8 @@ class Level {
         )
         this.player.update()
         //moving map
-        this.map.position.x -= this.speed
-        this.player.referencePoint -= this.speed
+        this.map.position.x -= this.speed * Game.deltaTime
+        this.player.referencePoint -= this.speed * Game.deltaTime
         //movement
         this.player.velocity.x = 0
         this.player.velocity.y = 0

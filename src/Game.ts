@@ -5,28 +5,33 @@ class Game {
 
     private canvas: HTMLCanvasElement
     private context: CanvasRenderingContext2D | null
+    static public deltaTime: number
     // player: Player
     // map: Map
     speed: number
-    level: Level
+    level!: Level
 
     constructor() {
+        Game.deltaTime = 1;
+
         let canvas = document.getElementById('main-canvas') as HTMLCanvasElement
         canvas.width = 2000
         canvas.height = 700
         let context = canvas.getContext("2d")
         this.context = context
         this.canvas = canvas
-        this.speed = 0.4
-        this.level = new Level(1, this.speed, this.canvas, this.context)
+        this.speed = 0.04
+        setTimeout(() => {
+            this.level = new Level(1, this.speed, this.canvas, this.context);
+            this.render()
+        }, 0)
         // this.player = new Player({ width: 50, height: 70 }, 3, { x: 10, y: 10 }, this.canvas, this.context)
         // this.map = new Map(1, { x: 0, y: 0 }, this.canvas, this.context)
-        this.render()
-        context?.scale(2, 2)
+        context ?.scale(2, 2)
     }
 
     render(): void {
-        requestAnimationFrame(() => this.render())
+        const start = performance.now()
         this.context!.fillStyle = "black"
         this.context!.fillRect(0, 0, this.canvas.width, this.canvas.height)
         //rendering
@@ -43,7 +48,10 @@ class Game {
         // //movement
         // this.player.velocity.x = 0
         // this.player.velocity.y = 0
-
+        requestAnimationFrame(() => {
+            Game.deltaTime = performance.now() - start
+            this.render()
+        })
     }
 
 }
