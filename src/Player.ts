@@ -42,7 +42,7 @@ class Player extends Entity {
                 active: true,
                 delay: 100,
                 projectilesArray: [
-                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: 0 }, dmg: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } }
+                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: 0 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } }
                 ]
             },
             {
@@ -51,9 +51,9 @@ class Player extends Entity {
                 active: false,
                 delay: 1000,
                 projectilesArray: [
-                    { position: { x: 0, y: 0 }, dimensions: { width: 70, height: 10 }, direction: { x: 1, y: 0 }, dmg: 5, owner: "player", speed: { vX: 0.2, vY: 0.2 } },
-                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 0, y: 1 }, dmg: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } },
-                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 0, y: -1 }, dmg: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } }
+                    { position: { x: 0, y: 0 }, dimensions: { width: 70, height: 10 }, direction: { x: 1, y: 0 }, dmg: 5, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } },
+                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 0, y: 1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } },
+                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 0, y: -1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } }
                 ]
             },
             {
@@ -62,9 +62,9 @@ class Player extends Entity {
                 active: false,
                 delay: 500,
                 projectilesArray: [
-                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 80 }, direction: { x: 1, y: 0 }, dmg: 5, owner: "player", speed: { vX: 0.4, vY: 0.2 } },
-                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: 1 }, dmg: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } },
-                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: -1 }, dmg: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } }
+                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 80 }, direction: { x: 1, y: 0 }, dmg: 5, hp: 1, owner: "player", speed: { vX: 0.4, vY: 0.2 } },
+                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: 1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } },
+                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: -1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } }
                 ]
             },
             // {
@@ -156,7 +156,6 @@ class Player extends Entity {
         let newTimeStamp = performance.now()
         if (newTimeStamp - this.lastAttackTimestamp < activeMode!.delay)
             return
-
         activeMode!.projectilesArray.forEach(projectile => {
             projectile.position = { x: this.position.x + this.dimensions.width / 2, y: this.position.y + this.dimensions.height / 2 - projectile.dimensions.height / 2 }
             this.activeProjectileArray.push(new Projectile(projectile, this.ctx))
@@ -167,10 +166,8 @@ class Player extends Entity {
 
     update(): void {
         this.distanceFromMap = (Math.abs(this.referencePoint) + this.position.x) / 2 // setting distance from starting x point of image
-        //this.draw()
-        this.attack()
-        //movement
 
+        //movement
         const speed = 0.5
         if (this.keys.a.pressed && this.lastKeyHorizontal === 'a')
             this.velocity.x = -speed
@@ -199,7 +196,14 @@ class Player extends Entity {
             this.position.y = this.canvas.height / 2 - this.dimensions.height
             this.velocity.y = 0
         }
+        this.activeProjectileArray.forEach(projectile => projectile.update())
+        this.activeProjectileArray = this.activeProjectileArray.filter(e =>
+            e.position.x > 0 && e.position.y > 0 && e.position.x <= this.canvas.width / 2 && e.position.y <= this.canvas.height / 2 && e.hp > 0
+        )
+        this.velocity.x = 0
+        this.velocity.y = 0
         this.draw()
+        this.attack()
     }
 }
 export default Player

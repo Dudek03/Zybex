@@ -16,7 +16,6 @@ class Map {
         this.canvas = canvas
     }
     changeStage(stageNum: number): void {
-        //this.image = createImage(`/stage${stageNum}.png`)
         this.image = createImage(`/level${stageNum}/bgMap.png`)
     }
     draw(): void {

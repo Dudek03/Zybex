@@ -1,18 +1,20 @@
 import { position, dimensions } from "./interfaces"
 import Game from "./Game";
-class Projectile {
+import Entity from "./Entity";
+class Projectile extends Entity {
 
-    position: position
-    dimensions: dimensions
+    // position: position
+    // dimensions: dimensions
     direction: { x: number, y: number }
     dmg: number
     owner: string
     speed: { vX: number, vY: number }
     context: CanvasRenderingContext2D | null
 
-    constructor(data: { position: position; dimensions: dimensions; direction: { x: number; y: number }; dmg: number; owner: string; speed: { vX: number, vY: number } }, context: CanvasRenderingContext2D | null) {
-        this.position = data.position
-        this.dimensions = data.dimensions
+    constructor(data: { position: position; dimensions: dimensions; direction: { x: number; y: number }; dmg: number; hp: number; owner: string; speed: { vX: number, vY: number } }, context: CanvasRenderingContext2D | null) {
+        super(data.dimensions, data.hp, data.position, context)
+        //this.position = data.position
+        //this.dimensions = data.dimensions
         this.direction = data.direction
         this.dmg = data.dmg
         this.owner = data.owner
