@@ -20,7 +20,6 @@ class Enemy extends Entity {
     }
 
     attack(): void {
-        console.log(this.attackInfo)
         let newTimeStamp = performance.now()
         if (newTimeStamp - this.lastAttackTimestamp < this.attackInfo.delay)
             return
@@ -29,10 +28,6 @@ class Enemy extends Entity {
             this.activeProjectileArray.push(new Projectile(projectile, this.ctx))
         })
         this.lastAttackTimestamp = newTimeStamp
-    }
-
-    test() {
-        console.log(this.dimensions.width)
     }
 
     update(): void {

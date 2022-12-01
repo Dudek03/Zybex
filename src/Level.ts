@@ -18,6 +18,7 @@ class Level {
     currentLvlData: { hordesArray: { pattern: (x: number) => number; speed: number; enemiesArray: enemyData[]; }[]; boss: { pattern: (x: number) => number; speed: number; view: enemyData[]; }; };
     hordeID: number
     horde: Horde
+    isBossFight: boolean;
 
     constructor(lvNum: number, speed: number, canvas: HTMLCanvasElement, context: CanvasRenderingContext2D | null) {
         this.lvNum = lvNum
@@ -26,6 +27,7 @@ class Level {
         this.speed = speed
         this.canvas = canvas
         this.context = context
+        this.isBossFight = false
         this.isBossDead = false
         this.levelsInfo = [
             {
@@ -34,8 +36,8 @@ class Level {
                         pattern: (x: number): number => { return Math.sin(x / 50) * 100 },
                         speed: 0.2,
                         enemiesArray: [
-                            { dimensions: { width: 40, height: 40 }, hp: 2, position: { x: this.canvas.width / 2 - 40, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [{ position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: 0 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.5, vY: 0.2 } }] }, isDropping: false },
-                            { dimensions: { width: 40, height: 40 }, hp: 2, position: { x: this.canvas.width / 2 - 90, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: false },
+                            { dimensions: { width: 40, height: 40 }, hp: 1, position: { x: this.canvas.width / 2 - 40, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [{ position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: 0 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.5, vY: 0.2 } }] }, isDropping: false },
+                            { dimensions: { width: 40, height: 40 }, hp: 1, position: { x: this.canvas.width / 2 - 90, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: false },
                             { dimensions: { width: 40, height: 40 }, hp: 1, position: { x: this.canvas.width / 2 - 140, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: false }
                         ]
                     },
@@ -43,14 +45,14 @@ class Level {
                         pattern: (x: number): number => { return Math.abs(Math.sin(x / 50)) * 100 },
                         speed: 0.2,
                         enemiesArray: [
-                            { dimensions: { width: 40, height: 40 }, hp: 10, position: { x: this.canvas.width / 2 - 40, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: false },
-                            { dimensions: { width: 40, height: 40 }, hp: 10, position: { x: this.canvas.width / 2 - 40, y: 90 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: false },
-                            { dimensions: { width: 40, height: 40 }, hp: 10, position: { x: this.canvas.width / 2 - 40, y: 130 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: false }
+                            { dimensions: { width: 40, height: 40 }, hp: 1, position: { x: this.canvas.width / 2 - 40, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: false },
+                            { dimensions: { width: 40, height: 40 }, hp: 1, position: { x: this.canvas.width / 2 - 90, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: false },
+                            { dimensions: { width: 40, height: 40 }, hp: 1, position: { x: this.canvas.width / 2 - 140, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: false }
                         ]
                     },
                 ],
                 boss: {
-                    pattern: (x: number): number => { return Math.sin(x) },
+                    pattern: (x: number): number => { return 40 },
                     speed: 0.1,
                     view: [{ dimensions: { width: 40, height: 40 }, hp: 10, position: { x: this.canvas.width / 2 - 40, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: false }]
                 }
@@ -99,7 +101,17 @@ class Level {
         if (!this.horde.activeEnemy.length) {
             this.hordeID = this.hordeID + 1
             //console.log(this.currentLvlData.hordesArray[1], this.hordeID)
-            //this.horde.loadNewHorde(this.currentLvlData.hordesArray[this.hordeID].pattern, this.currentLvlData.hordesArray[this.hordeID].enemiesArray, this.currentLvlData.hordesArray[this.hordeID].speed)
+            if (this.currentLvlData.hordesArray[this.hordeID])
+                this.horde.loadNewHorde(this.currentLvlData.hordesArray[this.hordeID].pattern, this.currentLvlData.hordesArray[this.hordeID].enemiesArray, this.currentLvlData.hordesArray[this.hordeID].speed)
+            else {
+                if (this.isBossFight)
+                    this.isBossDead = true
+                this.horde.loadNewHorde(this.currentLvlData.boss.pattern, this.currentLvlData.boss.view, this.currentLvlData.boss.speed)
+                this.isBossFight = true
+                console.log(this.horde.activeEnemy);
+
+            }
+
         }
         this.collision()
         this.map.draw()

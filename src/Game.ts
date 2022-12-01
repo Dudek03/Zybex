@@ -25,12 +25,13 @@ class Game {
         context?.scale(2, 2)
     }
 
-    gameOver() {
-        alert("u lost")
+    gameOver(text: string) {
+        alert(text)
     }
 
     render(): void {
-        this.level.player.hp <= 0 ? this.gameOver() : () => { }
+        this.level.isBossDead ? this.gameOver("u win") : () => { }
+        this.level.player.hp <= 0 ? this.gameOver("u lost") : () => { }
         const start = performance.now()
         this.context!.fillStyle = "black"
         this.context!.fillRect(0, 0, this.canvas.width, this.canvas.height)
