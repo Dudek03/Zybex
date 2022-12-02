@@ -52,7 +52,7 @@ class Level {
                     },
                 ],
                 boss: {
-                    pattern: (x: number): number => { return 40 },
+                    pattern: (_x: number): number => { return 40 },
                     speed: 0.1,
                     view: [{ dimensions: { width: 40, height: 40 }, hp: 10, position: { x: this.canvas.width / 2 - 40, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: false }]
                 }
