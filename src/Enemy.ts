@@ -7,17 +7,20 @@ class Enemy extends Entity {
     lastAttackTimestamp: number
     activeProjectileArray: Projectile[]
     isDropping: boolean;
+    canvas: HTMLCanvasElement;
 
-    constructor(data: { dimensions: dimensions, hp: number, position: position, ctx: CanvasRenderingContext2D | null, attack: { delay: number, projectilesArray: projectile[] }, isDropping: boolean }) {
+    constructor(data: { dimensions: dimensions, hp: number, position: position, ctx: CanvasRenderingContext2D | null, canvas: HTMLCanvasElement, attack: { delay: number, projectilesArray: projectile[] }, isDropping: boolean }) {
         super(data.dimensions, data.hp, data.position, data.ctx)
+        this.canvas = data.canvas
         this.attackInfo = data.attack
         this.isDropping = data.isDropping
-        this.lastAttackTimestamp = Date.now() - 1000
+        this.lastAttackTimestamp = performance.now()
         this.activeProjectileArray = []
+
     }
 
     attack(): void {
-        let newTimeStamp = Date.now()
+        let newTimeStamp = performance.now()
         if (newTimeStamp - this.lastAttackTimestamp < this.attackInfo.delay)
             return
         this.attackInfo.projectilesArray.forEach(projectile => {
@@ -27,7 +30,11 @@ class Enemy extends Entity {
         this.lastAttackTimestamp = newTimeStamp
     }
 
-    update() {
+    update(): void {
+        this.activeProjectileArray.forEach(bullet => bullet.update())
+        this.activeProjectileArray = this.activeProjectileArray.filter(e =>
+            e.position.x > 0 && e.position.y > 0 && e.position.x <= this.canvas.width / 2 && e.position.y <= this.canvas.height / 2 && e.hp > 0
+        )
         this.draw()
         this.attack()
 
