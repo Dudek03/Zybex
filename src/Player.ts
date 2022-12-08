@@ -18,7 +18,7 @@ class Player extends Entity {
     fireModes: fireMode[]
 
     constructor(dimensions: dimensions, hp: number, position: position, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D | null) {
-        super(dimensions, hp, position, ctx)
+        super(dimensions, hp, position, ctx, "green")
         this.canvas = canvas
         this.isAttacking = false
         this.lastAttackTimestamp = performance.now()

@@ -30,7 +30,7 @@ class Game {
     }
 
     render(): void {
-        this.level.isBossDead ? this.gameOver("u win") : () => { }
+        //this.level.isBossDead ? this.gameOver("u win") : () => { }
         this.level.player.hp <= 0 ? this.gameOver("u lost") : () => { }
         const start = performance.now()
         this.context!.fillStyle = "black"
