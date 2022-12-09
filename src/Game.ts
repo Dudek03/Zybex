@@ -11,18 +11,19 @@ class Game {
     constructor() {
         Game.deltaTime = 1;
         let canvas = document.getElementById('main-canvas') as HTMLCanvasElement
-        canvas.width = 2000
-        canvas.height = 700
+        canvas.width = 1816
+        canvas.height = 532
         let context = canvas.getContext("2d")
         this.context = context
         this.canvas = canvas
-        this.speed = 0.04
+        this.speed = 0.09
         setTimeout(() => {
             this.level = new Level(1, this.speed, this.canvas, this.context);
             this.render()
         }, 0)
         this.isGameOver = false
-        context ?.scale(2, 2)
+        //context?.scale(2, 2) TY KURWO 
+        console.log(window.innerWidth)
     }
 
     gameOver(text: string) {
@@ -30,8 +31,8 @@ class Game {
     }
 
     render(): void {
-        this.level.isBossDead? this.gameOver("u win") : () => { }
-        this.level.player.hp <= 0? this.gameOver("u lost") : () => { }
+        //this.level.isBossDead ? this.gameOver("u win") : () => { }
+        //this.level.player.hp <= 0 ? this.gameOver("u lost") : () => { }
         const start = performance.now()
         this.context!.fillStyle = "black"
         this.context!.fillRect(0, 0, this.canvas.width, this.canvas.height)

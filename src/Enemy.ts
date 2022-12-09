@@ -39,7 +39,7 @@ class Enemy extends Entity {
     update(): void {
         this.activeProjectileArray.forEach(bullet => bullet.update())
         this.activeProjectileArray = this.activeProjectileArray.filter(e =>
-            e.position.x > 0 && e.position.y > 0 && e.position.x <= this.canvas.width / 2 && e.position.y <= this.canvas.height / 2 && e.hp > 0
+            e.position.x > 0 && e.position.y > 0 && e.position.x <= this.canvas.width && e.position.y <= this.canvas.height && e.hp > 0
         )
         this.draw()
         this.attack()

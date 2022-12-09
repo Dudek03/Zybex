@@ -28,7 +28,7 @@ class Horde {
 
     checkEnemies() {
         this.activeEnemy = this.activeEnemy.filter(e =>
-            e.position.x > 0 && e.position.y > 0 && e.position.x <= this.canvas.width / 2 && e.position.y <= this.canvas.height / 2 && e.hp > 0
+            e.position.x > 0 && e.position.y > 0 && e.position.x <= this.canvas.width && e.position.y <= this.canvas.height && e.hp > 0
         )
     }
 
@@ -37,7 +37,7 @@ class Horde {
         this.checkEnemies()
         this.activeEnemy.forEach(e => {
             e.position.x -= this.speed * Game.deltaTime
-            e.position.y = this.pattern(e.position.x) + this.canvas.height / 4
+            e.position.y = this.pattern(e.position.x) + this.canvas.height / 2
             //console.log(e.position.x)
             e.update()
         })

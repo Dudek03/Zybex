@@ -169,7 +169,7 @@ class Player extends Entity {
     }
 
     update(): void {
-        this.distanceFromMap = (Math.abs(this.referencePoint) + this.position.x) / 2 // setting distance from starting x point of image
+        this.distanceFromMap = (Math.abs(this.referencePoint) + this.position.x) // setting distance from starting x point of image
 
         //movement
         const speed = 0.5
@@ -188,21 +188,21 @@ class Player extends Entity {
             this.velocity.x = 0
             this.position.x = 0
         }
-        else if (this.position.x + this.dimensions.width >= this.canvas.width / 2) {
-            this.position.x = this.canvas.width / 2 - this.dimensions.width
+        else if (this.position.x + this.dimensions.width >= this.canvas.width) {
+            this.position.x = this.canvas.width - this.dimensions.width
             this.velocity.x = 0
         }
         if (this.position.y <= 0) {
             this.velocity.y = 0
             this.position.y = 0
         }
-        else if (this.position.y + this.dimensions.height >= this.canvas.height / 2) {
-            this.position.y = this.canvas.height / 2 - this.dimensions.height
+        else if (this.position.y + this.dimensions.height >= this.canvas.height) {
+            this.position.y = this.canvas.height - this.dimensions.height
             this.velocity.y = 0
         }
         this.activeProjectileArray.forEach(projectile => projectile.update())
         this.activeProjectileArray = this.activeProjectileArray.filter(e =>
-            e.position.x > 0 && e.position.y > 0 && e.position.x <= this.canvas.width / 2 && e.position.y <= this.canvas.height / 2 && e.hp > 0
+            e.position.x > 0 && e.position.y > 0 && e.position.x <= this.canvas.width && e.position.y <= this.canvas.height && e.hp > 0
         )
         this.velocity.x = 0
         this.velocity.y = 0
