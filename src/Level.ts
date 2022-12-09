@@ -5,6 +5,7 @@ import Game from "./Game";
 import Horde from "./Horde";
 import Item from "./Item";
 import { rectCollision } from "./utilities"
+import UIController from "./UIController"
 
 class Level {
 
@@ -40,7 +41,7 @@ class Level {
                         enemiesArray: [
                             { dimensions: { width: 40, height: 40 }, hp: 1, position: { x: this.canvas.width / 2 - 40, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [{ position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: 0 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.5, vY: 0.2 } }] }, isDropping: { addHp: 0, addFireMode: null } },
                             { dimensions: { width: 40, height: 40 }, hp: 1, position: { x: this.canvas.width / 2 - 90, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: { addHp: 1, addFireMode: null } },
-                            { dimensions: { width: 40, height: 40 }, hp: 1, position: { x: this.canvas.width / 2 - 140, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: { id: 1, value: 1 } } }
+                            { dimensions: { width: 40, height: 40 }, hp: 1, position: { x: this.canvas.width / 2 - 140, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: { id: 2, value: 1 } } }
                         ]
                     },
                     {
@@ -64,6 +65,7 @@ class Level {
         this.currentLvlData = this.levelsInfo[lvNum - 1]
         this.hordeID = 0
         this.horde = new Horde(this.currentLvlData.hordesArray[this.hordeID].pattern, this.currentLvlData.hordesArray[this.hordeID].enemiesArray, this.currentLvlData.hordesArray[this.hordeID].speed, this.canvas)
+        UIController.getInstance().updateHp(this.player.hp)
     }
 
     collision() {
@@ -73,10 +75,13 @@ class Level {
                 if (rectCollision(bullet, ene)) {
                     bullet.hp--
                     ene.hp--
+                    console.log(ene.hp)
+                    if (ene.hp <= 0) {
+                        UIController.getInstance().updateScore(200)
+                    }
                     if (ene.hp == 0 && (ene.isDropping.addHp != 0 || ene.isDropping.addFireMode != null)) {
                         this.activeItems.push(ene.drop())
                     }
-                    console.log(this.activeItems)
                 }
             })
         })
@@ -86,6 +91,7 @@ class Level {
                 this.player.position.x = 0
                 this.player.position.y = 0
                 this.player.hp--
+                UIController.getInstance().updateHp(this.player.hp)
             }
 
         })
@@ -97,8 +103,22 @@ class Level {
                     this.player.position.y = 0
                     this.player.hp--
                     bullet.hp--
+                    UIController.getInstance().updateHp(this.player.hp)
                 }
             })
+        })
+
+        this.activeItems.forEach(item => {
+            if (rectCollision(this.player, item)) {
+                item.hp--
+                this.player.hp += item.dropInfo.addHp
+                UIController.getInstance().updateHp(this.player.hp)
+                if (!item.dropInfo.addFireMode) return
+                if (!this.player.fireModes[item.dropInfo.addFireMode.id - 1].picked)
+                    this.player.fireModes[item.dropInfo.addFireMode.id - 1].picked = true
+                else
+                    this.player.fireModes[item.dropInfo.addFireMode.id - 1].power += item.dropInfo.addFireMode.value
+            }
         })
     }
 

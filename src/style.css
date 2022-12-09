@@ -7,3 +7,19 @@
 #main-canvas {
   border: 1px solid black;
 }
+
+#gameArea{
+  background-color: black;
+  color: white;
+  font-size: 2rem;
+}
+
+#topBar{
+  padding: 40px;
+}
+
+#bottomBar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

@@ -41,15 +41,17 @@ class Player extends Entity {
                 picked: true,
                 active: true,
                 delay: 100,
+                power: 1,
                 projectilesArray: [
                     { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: 0 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } }
                 ]
             },
             {
                 id: 2,
-                picked: true,
+                picked: false,
                 active: false,
                 delay: 1000,
+                power: 1,
                 projectilesArray: [
                     { position: { x: 0, y: 0 }, dimensions: { width: 70, height: 10 }, direction: { x: 1, y: 0 }, dmg: 5, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } },
                     { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 0, y: 1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } },
@@ -61,6 +63,7 @@ class Player extends Entity {
                 picked: true,
                 active: false,
                 delay: 500,
+                power: 1,
                 projectilesArray: [
                     { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 80 }, direction: { x: 1, y: 0 }, dmg: 5, hp: 1, owner: "player", speed: { vX: 0.4, vY: 0.2 } },
                     { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: 1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } },
@@ -158,6 +161,7 @@ class Player extends Entity {
             return
         activeMode!.projectilesArray.forEach(projectile => {
             projectile.position = { x: this.position.x + this.dimensions.width / 2, y: this.position.y + this.dimensions.height / 2 - projectile.dimensions.height / 2 }
+            projectile.dmg = projectile.dmg * activeMode!.power
             this.activeProjectileArray.push(new Projectile(projectile, this.ctx))
         })
         this.lastAttackTimestamp = newTimeStamp
