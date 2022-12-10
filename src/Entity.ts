@@ -1,5 +1,5 @@
 import { position, dimensions } from "./interfaces"
-import { createImage, createImageAsync } from "./utilities"
+import { createImage } from "./utilities"
 abstract class Entity {
     dimensions: dimensions
     hp: number
