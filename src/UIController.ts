@@ -28,5 +28,45 @@ export default class UIController {
         console.log(add, oldScore, newScore)
         this.points!.innerText = newScore.toString()
     }
+
+    setgray(id: number) {
+        let divek: HTMLElement | null = document.getElementById(`weapon${id}`)
+        let cover = document.createElement("div")
+        cover.classList.add("notPicked")
+        divek?.appendChild(cover)
+    }
+
+    removeGray(id: number) {
+        let divek: HTMLElement | null = document.getElementById(`weapon${id}`)
+        for (let i = 1; i < divek!.childNodes.length; i++) {
+            divek!.childNodes[i].remove()
+        }
+    }
+
+    setActive(id: number) {
+        let divek: HTMLElement | null = document.getElementById(`weapon${id}`)
+        let border = document.createElement("div")
+        border.classList.add("isActive")
+        divek?.appendChild(border)
+    }
+
+    removeActive(id: number) {
+        let divek: HTMLElement | null = document.getElementById(`weapon${id}`)
+        for (let i = 1; i < divek!.childNodes.length; i++) {
+            divek!.childNodes[i].remove()
+        }
+    }
+
+    displayText(text: string) {
+        let divToChange = document.getElementById("big-text")
+        divToChange!.innerText = text
+        divToChange!.style.display = "flex"
+    }
+
+    hideText() {
+        let divToChange = document.getElementById("big-text")
+        divToChange!.style.display = "none"
+    }
+
 }
 

@@ -1,4 +1,5 @@
 import Level from "./Level"
+import UIController from "./UIController"
 class Game {
 
     private canvas: HTMLCanvasElement
@@ -26,17 +27,18 @@ class Game {
         console.log(window.innerWidth)
     }
 
-    gameOver(text: string) {
-        alert(text)
-    }
-
     render(): void {
-        //this.level.isBossDead ? this.gameOver("u win") : () => { }
-        //this.level.player.hp <= 0 ? this.gameOver("u lost") : () => { }
+        if (this.level.isBossDead)
+            UIController.getInstance().displayText(`U won your score was: ${document.getElementById("points")?.innerText}`)
+        if (this.level.player.hp <= 0)
+            UIController.getInstance().displayText("U lost")
         const start = performance.now()
         this.context!.fillStyle = "black"
         this.context!.fillRect(0, 0, this.canvas.width, this.canvas.height)
-        this.level.render()
+        if (!this.level.isBossDead && this.level.player.hp > 0) {
+            this.level.render()
+        }
+
         requestAnimationFrame(() => {
             Game.deltaTime = performance.now() - start
             this.render()

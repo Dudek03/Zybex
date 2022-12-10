@@ -20,8 +20,8 @@ class Level {
     currentLvlData: { hordesArray: { pattern: (x: number) => number; speed: number; enemiesArray: enemyData[]; }[]; boss: { pattern: (x: number) => number; speed: number; view: enemyData[]; }; };
     hordeID: number
     horde: Horde
-    isBossFight: boolean;
-    activeItems: Item[];
+    isBossFight: boolean
+    activeItems: Item[]
 
     constructor(lvNum: number, speed: number, canvas: HTMLCanvasElement, context: CanvasRenderingContext2D | null) {
         this.lvNum = lvNum
@@ -118,15 +118,18 @@ class Level {
                 }
             })
         })
-
+        //collision between player and items
         this.activeItems.forEach(item => {
             if (rectCollision(this.player, item)) {
                 item.hp--
                 this.player.hp += item.dropInfo.addHp
                 UIController.getInstance().updateHp(this.player.hp)
                 if (!item.dropInfo.addFireMode) return
-                if (!this.player.fireModes[item.dropInfo.addFireMode.id - 1].picked)
+                if (!this.player.fireModes[item.dropInfo.addFireMode.id - 1].picked) {
                     this.player.fireModes[item.dropInfo.addFireMode.id - 1].picked = true
+                    UIController.getInstance().removeGray(item.dropInfo.addFireMode.id)
+                }
+
                 else
                     this.player.fireModes[item.dropInfo.addFireMode.id - 1].power += item.dropInfo.addFireMode.value
             }

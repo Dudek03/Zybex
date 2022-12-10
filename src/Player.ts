@@ -2,6 +2,7 @@ import { position, dimensions, fireMode } from "./interfaces"
 import Entity from "./Entity"
 import Projectile from "./Projectile"
 import Game from "./Game";
+import UIController from "./UIController";
 class Player extends Entity {
 
     keys: { a: { pressed: boolean }; d: { pressed: boolean }; w: { pressed: boolean }; s: { pressed: boolean } }
@@ -70,13 +71,16 @@ class Player extends Entity {
                     { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: -1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } }
                 ]
             },
-            // {
-            //     id: 4,
-            //     active: false,
-            //     projectilesArray: [
-
-            //     ]
-            // },
+            {
+                id: 4,
+                picked: false,
+                active: false,
+                delay: 1000,
+                power: 1,
+                projectilesArray: [
+                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: 0 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } }
+                ]
+            },
             // {
             //     id: 5,
             //     active: false,
@@ -85,6 +89,12 @@ class Player extends Entity {
             //     ]
             // },
         ]
+        this.fireModes.forEach(mode => {
+            if (mode.picked === false) {
+                UIController.getInstance().setgray(mode.id)
+            }
+        })
+        UIController.getInstance().setActive(1)
         this.moveInput()
     }
 
@@ -139,6 +149,7 @@ class Player extends Entity {
     }
 
     switchToNextShootingMode() {
+        UIController.getInstance().removeActive(this.presentShootingMode)
         do {
             if (this.presentShootingMode + 1 > this.fireModes.length) {
                 this.presentShootingMode = 1
@@ -150,7 +161,7 @@ class Player extends Entity {
             if (e.id == this.presentShootingMode)
                 e.active = true
         })
-
+        UIController.getInstance().setActive(this.presentShootingMode)
     }
 
     attack(): void {
