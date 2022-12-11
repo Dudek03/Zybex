@@ -39,25 +39,85 @@ class Level {
                         pattern: (x: number): number => { return Math.sin(x / 50) * 100 },
                         speed: 0.06,
                         enemiesArray: [
-                            { dimensions: { width: 40, height: 40 }, hp: 1, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [{ position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: 0 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.5, vY: 0.2 }, image: "bullet2" }] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
-                            { dimensions: { width: 40, height: 40 }, hp: 1, position: { x: this.canvas.width - 90, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: { addHp: 1, addFireMode: null, image: "hpek" }, image: "enemy" },
-                            { dimensions: { width: 40, height: 40 }, hp: 1, position: { x: this.canvas.width - 140, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: { id: 2, value: 1 }, image: '/weapons/weapon2' }, image: "enemy" }
+                            { dimensions: { width: 40, height: 40 }, hp: 5, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [{ position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: 0 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.5, vY: 0.2 }, image: "bullet2" }] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 4, position: { x: this.canvas.width - 90, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: { addHp: 1, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 3, position: { x: this.canvas.width - 140, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: { id: 2, value: 1 }, image: '/weapons/weapon2' }, image: "enemy" }
                         ]
                     },
                     {
                         pattern: (x: number): number => { return Math.abs(Math.sin(x / 50)) * 100 },
                         speed: 0.2,
                         enemiesArray: [
-                            { dimensions: { width: 40, height: 40 }, hp: 1, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
-                            { dimensions: { width: 40, height: 40 }, hp: 1, position: { x: this.canvas.width - 90, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
-                            { dimensions: { width: 40, height: 40 }, hp: 1, position: { x: this.canvas.width - 140, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" }
+                            { dimensions: { width: 40, height: 40 }, hp: 3, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 4, position: { x: this.canvas.width - 90, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 3, position: { x: this.canvas.width - 140, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" }
+                        ]
+                    },
+                    {
+                        pattern: (x: number): number => { return -Math.abs(x / 12) },
+                        speed: 0.7,
+                        enemiesArray: [
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 90, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 140, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 190, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 230, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 280, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                        ]
+                    },
+                    {
+                        pattern: (x: number): number => { return (Math.sin(3 * x / 200) * Math.cos(2 * x / 200)) * 100 },
+                        speed: 0.3,
+                        enemiesArray: [
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: { delay: 600, projectilesArray: [{ position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: 0 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.5, vY: 0.2 }, image: "bullet2" }] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 90, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 140, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 190, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 230, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 280, y: 40 }, ctx: this.context, attack: { delay: 600, projectilesArray: [{ position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: 0 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.5, vY: 0.2 }, image: "bullet2" }] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                        ]
+                    },
+                    {
+                        pattern: (x: number): number => { return Math.abs((x - 25) / 250) * 20 },
+                        speed: 0.3,
+                        enemiesArray: [
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: { delay: 600, projectilesArray: [{ position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: 0 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.5, vY: 0.2 }, image: "bullet2" }] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 90, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 140, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 190, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 230, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 280, y: 40 }, ctx: this.context, attack: { delay: 600, projectilesArray: [{ position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: 0 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.5, vY: 0.2 }, image: "bullet2" }] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                        ]
+                    },
+                    {
+                        pattern: (x: number): number => { return (x / 80) * Math.sin(x / 100) },
+                        speed: 0.3,
+                        enemiesArray: [
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: { delay: 600, projectilesArray: [{ position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: 0 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.5, vY: 0.2 }, image: "bullet2" }] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 90, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 140, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 190, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 230, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 280, y: 40 }, ctx: this.context, attack: { delay: 600, projectilesArray: [{ position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: 0 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.5, vY: 0.2 }, image: "bullet2" }] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
                         ]
                     },
                 ],
                 boss: {
-                    pattern: (_x: number): number => { return 40 },
-                    speed: 0.1,
-                    view: [{ dimensions: { width: 100, height: 80 }, hp: 10, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "boss" }]
+                    pattern: (x: number): number => { return (Math.sin(3 * x / 200) * Math.cos(2 * x / 200)) * 500 },
+                    speed: 0.01,
+                    view: [{
+                        dimensions: { width: 100, height: 80 }, hp: 20, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: {
+                            delay: 1000, projectilesArray: [
+                                { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 40 }, direction: { x: -1, y: -0.5 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.4, vY: 0.2 }, image: "bullet2" },
+                                { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 40 }, direction: { x: -1, y: 0.5 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.4, vY: 0.2 }, image: "bullet2" },
+                                { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: 1 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.2, vY: 0.2 }, image: "bullet2" },
+                                { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: -1 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.2, vY: 0.2 }, image: "bullet2" },
+                                { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: 1 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.6, vY: 0.1 }, image: "bullet2" },
+                                { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: -1 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.6, vY: 0.1 }, image: "bullet2" },
+                            ]
+                        },
+                        isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "boss"
+                    }]
                 }
             }
         ]

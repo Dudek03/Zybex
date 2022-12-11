@@ -16,6 +16,7 @@ class Game {
         canvas.height = 532
         let context = canvas.getContext("2d")
         this.context = context
+        this.context!.imageSmoothingEnabled = false
         this.canvas = canvas
         this.speed = 0.09
         setTimeout(() => {
