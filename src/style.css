@@ -1,8 +1,14 @@
+@font-face {
+  font-family: "atari";
+  src: url("/AtariClassic.ttf");
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   overflow: hidden;
+  font-family: "atari";
 }
 
 #main-canvas {
