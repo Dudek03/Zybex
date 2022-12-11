@@ -81,13 +81,6 @@ class Player extends Entity {
                     { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: 0 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 }, image: "bullet" }
                 ]
             },
-            // {
-            //     id: 5,
-            //     active: false,
-            //     projectilesArray: [
-
-            //     ]
-            // },
         ]
         this.fireModes.forEach(mode => {
             if (mode.picked === false) {

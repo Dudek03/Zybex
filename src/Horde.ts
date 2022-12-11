@@ -33,12 +33,10 @@ class Horde {
     }
 
     update() {
-        //console.log(this.activeEnemy)
         this.checkEnemies()
         this.activeEnemy.forEach(e => {
             e.position.x -= this.speed * Game.deltaTime
             e.position.y = this.pattern(e.position.x) + this.canvas.height / 2
-            //console.log(e.position.x)
             e.update()
         })
     }

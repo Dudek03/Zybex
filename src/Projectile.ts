@@ -3,8 +3,6 @@ import Game from "./Game";
 import Entity from "./Entity";
 class Projectile extends Entity {
 
-    // position: position
-    // dimensions: dimensions
     direction: { x: number, y: number }
     dmg: number
     owner: string
@@ -13,8 +11,6 @@ class Projectile extends Entity {
 
     constructor(data: { position: position; dimensions: dimensions; direction: { x: number; y: number }; dmg: number; hp: number; owner: string; speed: { vX: number, vY: number }, image?: string }, context: CanvasRenderingContext2D | null) {
         super(data.dimensions, data.hp, data.position, context, "gray", data.image)
-        //this.position = data.position
-        //this.dimensions = data.dimensions
         this.direction = data.direction
         this.dmg = data.dmg
         this.owner = data.owner
