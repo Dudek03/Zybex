@@ -57,11 +57,11 @@ class Level {
                         pattern: (x: number): number => { return -Math.abs(x / 12) },
                         speed: 0.7,
                         enemiesArray: [
-                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: { id: 1, value: 3 }, image: "/weapons/weapon1" }, image: "enemy" },
                             { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 90, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
-                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 140, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
-                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 190, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
-                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 230, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 4, position: { x: this.canvas.width - 140, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 3, position: { x: this.canvas.width - 190, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 1, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 3, position: { x: this.canvas.width - 230, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 1, addFireMode: null, image: "hpek" }, image: "enemy" },
                             { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 280, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
                         ]
                     },
@@ -78,7 +78,7 @@ class Level {
                         ]
                     },
                     {
-                        pattern: (x: number): number => { return Math.abs((x - 25) / 250) * 20 },
+                        pattern: (x: number): number => { return Math.abs((x + 15) / 250) * 20 },
                         speed: 0.3,
                         enemiesArray: [
                             { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: { delay: 600, projectilesArray: [{ position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: 0 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.5, vY: 0.2 }, image: "bullet2" }] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
@@ -103,11 +103,12 @@ class Level {
                     },
                 ],
                 boss: {
-                    pattern: (x: number): number => { return (Math.sin(3 * x / 200) * Math.cos(2 * x / 200)) * 500 },
-                    speed: 0.01,
+                    pattern: (x: number): number => { return (Math.sin(3 * x / 200) * Math.cos(2 * x / 200)) * 200 },
+                    speed: 0.07,
                     view: [{
                         dimensions: { width: 100, height: 80 }, hp: 20, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: {
                             delay: 1000, projectilesArray: [
+                                { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: 0 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.5, vY: 0.2 }, image: "bullet2" },
                                 { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 40 }, direction: { x: -1, y: -0.5 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.4, vY: 0.2 }, image: "bullet2" },
                                 { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 40 }, direction: { x: -1, y: 0.5 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.4, vY: 0.2 }, image: "bullet2" },
                                 { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: 1 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.2, vY: 0.2 }, image: "bullet2" },
@@ -145,12 +146,12 @@ class Level {
             this.horde.activeEnemy.forEach(ene => {
                 if (rectCollision(bullet, ene)) {
                     bullet.hp--
-                    ene.hp--
+                    ene.hp = ene.hp - bullet.dmg
                     //console.log(ene.hp)
                     if (ene.hp <= 0) {
                         UIController.getInstance().updateScore(200)
                     }
-                    if (ene.hp == 0 && (ene.isDropping.addHp != 0 || ene.isDropping.addFireMode != null)) {
+                    if (ene.hp <= 0 && (ene.isDropping.addHp != 0 || ene.isDropping.addFireMode != null)) {
                         this.activeItems.push(ene.drop())
                     }
                 }

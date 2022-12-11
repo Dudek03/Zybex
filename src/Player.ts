@@ -44,7 +44,7 @@ class Player extends Entity {
                 delay: 100,
                 power: 1,
                 projectilesArray: [
-                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: 0 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 }, image: "bullet" }
+                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: 0 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.5, vY: 0.5 }, image: "bullet" }
                 ]
             },
             {
@@ -54,7 +54,7 @@ class Player extends Entity {
                 delay: 1000,
                 power: 1,
                 projectilesArray: [
-                    { position: { x: 0, y: 0 }, dimensions: { width: 70, height: 10 }, direction: { x: 1, y: 0 }, dmg: 5, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 }, image: "bullet" },
+                    { position: { x: 0, y: 0 }, dimensions: { width: 70, height: 20 }, direction: { x: 1, y: 0 }, dmg: 10, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 }, image: "bullet" },
                     { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 0, y: 1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 }, image: "bullet" },
                     { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 0, y: -1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 }, image: "bullet" }
                 ]
@@ -67,8 +67,8 @@ class Player extends Entity {
                 power: 1,
                 projectilesArray: [
                     { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 80 }, direction: { x: 1, y: 0 }, dmg: 5, hp: 1, owner: "player", speed: { vX: 0.4, vY: 0.2 }, image: "bullet" },
-                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: 1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 }, image: "bullet" },
-                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: -1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 }, image: "bullet" }
+                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: 1 }, dmg: 2, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 }, image: "bullet" },
+                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: -1 }, dmg: 2, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 }, image: "bullet" }
                 ]
             },
             {
