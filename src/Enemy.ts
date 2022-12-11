@@ -7,11 +7,11 @@ class Enemy extends Entity {
     attackInfo: { delay: number; projectilesArray: projectile[] }
     lastAttackTimestamp: number
     activeProjectileArray: Projectile[]
-    isDropping: { addHp: number, addFireMode: { id: number, value: number } | null };
+    isDropping: { addHp: number, addFireMode: { id: number, value: number } | null, image: string };
     canvas: HTMLCanvasElement;
 
-    constructor(data: { dimensions: dimensions, hp: number, position: position, ctx: CanvasRenderingContext2D | null, canvas: HTMLCanvasElement, attack: { delay: number, projectilesArray: projectile[] }, isDropping: { addHp: number, addFireMode: { id: number, value: number } | null } }) {
-        super(data.dimensions, data.hp, data.position, data.ctx)
+    constructor(data: { dimensions: dimensions, hp: number, position: position, ctx: CanvasRenderingContext2D | null, canvas: HTMLCanvasElement, attack: { delay: number, projectilesArray: projectile[] }, isDropping: { addHp: number, addFireMode: { id: number, value: number } | null, image: string }, image: string }) {
+        super(data.dimensions, data.hp, data.position, data.ctx, "red", data.image)
         this.canvas = data.canvas
         this.attackInfo = data.attack
         this.isDropping = data.isDropping
@@ -33,7 +33,7 @@ class Enemy extends Entity {
 
     drop(): Item {
         console.log("drop")
-        return new Item({ dimensions: { width: 20, height: 30 }, hp: 1, position: { x: this.position.x, y: this.position.y }, ctx: this.ctx }, { addHp: this.isDropping.addHp, addFireMode: this.isDropping.addFireMode })
+        return new Item({ dimensions: { width: 20, height: 30 }, hp: 1, position: { x: this.position.x, y: this.position.y }, ctx: this.ctx }, { addHp: this.isDropping.addHp, addFireMode: this.isDropping.addFireMode, image: this.isDropping.image })
     }
 
     update(): void {
@@ -41,7 +41,7 @@ class Enemy extends Entity {
         this.activeProjectileArray = this.activeProjectileArray.filter(e =>
             e.position.x > 0 && e.position.y > 0 && e.position.x <= this.canvas.width && e.position.y <= this.canvas.height && e.hp > 0
         )
-        this.draw()
+        this.drawGraphic()
         this.attack()
 
     }

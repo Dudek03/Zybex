@@ -16,14 +16,14 @@ class Horde {
         this.enemiesArray = enemiesArray
         this.speed = speed
         this.canvas = canvas
-        this.enemiesArray.forEach(e => this.activeEnemy.push(new Enemy({ dimensions: e.dimensions, hp: e.hp, position: e.position, ctx: e.ctx, canvas: this.canvas, attack: e.attack, isDropping: e.isDropping })))
+        this.enemiesArray.forEach(e => this.activeEnemy.push(new Enemy({ dimensions: e.dimensions, hp: e.hp, position: e.position, ctx: e.ctx, canvas: this.canvas, attack: e.attack, isDropping: e.isDropping, image: e.image })))
     }
 
     loadNewHorde(pattern: (x: number) => number, enemiesArray: enemyData[], speed: number) {
         this.pattern = pattern
         this.enemiesArray = enemiesArray
         this.speed = speed
-        this.enemiesArray.forEach(e => this.activeEnemy.push(new Enemy({ dimensions: e.dimensions, hp: e.hp, position: e.position, ctx: e.ctx, canvas: this.canvas, attack: e.attack, isDropping: e.isDropping })))
+        this.enemiesArray.forEach(e => this.activeEnemy.push(new Enemy({ dimensions: e.dimensions, hp: e.hp, position: e.position, ctx: e.ctx, canvas: this.canvas, attack: e.attack, isDropping: e.isDropping, image: e.image })))
     }
 
     checkEnemies() {

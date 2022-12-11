@@ -18,8 +18,8 @@ class Player extends Entity {
     presentShootingMode: number
     fireModes: fireMode[]
 
-    constructor(dimensions: dimensions, hp: number, position: position, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D | null) {
-        super(dimensions, hp, position, ctx, "green")
+    constructor(dimensions: dimensions, hp: number, position: position, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D | null, image: string) {
+        super(dimensions, hp, position, ctx, "green", image)
         this.canvas = canvas
         this.isAttacking = false
         this.lastAttackTimestamp = performance.now()
@@ -44,7 +44,7 @@ class Player extends Entity {
                 delay: 100,
                 power: 1,
                 projectilesArray: [
-                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: 0 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } }
+                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: 0 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 }, image: "bullet" }
                 ]
             },
             {
@@ -54,9 +54,9 @@ class Player extends Entity {
                 delay: 1000,
                 power: 1,
                 projectilesArray: [
-                    { position: { x: 0, y: 0 }, dimensions: { width: 70, height: 10 }, direction: { x: 1, y: 0 }, dmg: 5, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } },
-                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 0, y: 1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } },
-                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 0, y: -1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } }
+                    { position: { x: 0, y: 0 }, dimensions: { width: 70, height: 10 }, direction: { x: 1, y: 0 }, dmg: 5, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 }, image: "bullet" },
+                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 0, y: 1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 }, image: "bullet" },
+                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 0, y: -1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 }, image: "bullet" }
                 ]
             },
             {
@@ -66,9 +66,9 @@ class Player extends Entity {
                 delay: 500,
                 power: 1,
                 projectilesArray: [
-                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 80 }, direction: { x: 1, y: 0 }, dmg: 5, hp: 1, owner: "player", speed: { vX: 0.4, vY: 0.2 } },
-                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: 1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } },
-                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: -1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } }
+                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 80 }, direction: { x: 1, y: 0 }, dmg: 5, hp: 1, owner: "player", speed: { vX: 0.4, vY: 0.2 }, image: "bullet" },
+                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: 1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 }, image: "bullet" },
+                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: -1 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 }, image: "bullet" }
                 ]
             },
             {
@@ -78,7 +78,7 @@ class Player extends Entity {
                 delay: 1000,
                 power: 1,
                 projectilesArray: [
-                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: 0 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 } }
+                    { position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: 1, y: 0 }, dmg: 1, hp: 1, owner: "player", speed: { vX: 0.2, vY: 0.2 }, image: "bullet" }
                 ]
             },
             // {
@@ -217,7 +217,7 @@ class Player extends Entity {
         )
         this.velocity.x = 0
         this.velocity.y = 0
-        this.draw()
+        this.drawGraphic()
         this.attack()
     }
 }
