@@ -1,3 +1,2 @@
 # Zybex
-school project - replicate game ffrom Atari 8bit
-UWU
+school project - replicate game from Atari 8bit
