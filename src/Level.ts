@@ -39,18 +39,18 @@ class Level {
                         pattern: (x: number): number => { return Math.sin(x / 50) * 100 },
                         speed: 0.06,
                         enemiesArray: [
-                            { dimensions: { width: 40, height: 40 }, hp: 5, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [{ position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: 0 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.5, vY: 0.2 }, image: "bullet2" }] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
-                            { dimensions: { width: 40, height: 40 }, hp: 4, position: { x: this.canvas.width - 90, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: { addHp: 1, addFireMode: null, image: "hpek" }, image: "enemy" },
-                            { dimensions: { width: 40, height: 40 }, hp: 3, position: { x: this.canvas.width - 140, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: { id: 2, value: 1 }, image: '/weapons/weapon2' }, image: "enemy" }
+                            { dimensions: { width: 40, height: 40 }, hp: 7, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [{ position: { x: 0, y: 0 }, dimensions: { width: 10, height: 10 }, direction: { x: -1, y: 0 }, dmg: 1, hp: 1, owner: "enemy", speed: { vX: 0.5, vY: 0.2 }, image: "bullet2" }] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 90, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: { addHp: 1, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 5, position: { x: this.canvas.width - 140, y: 40 }, ctx: this.context, attack: { delay: 10, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: { id: 2, value: 1 }, image: '/weapons/weapon2' }, image: "enemy" }
                         ]
                     },
                     {
                         pattern: (x: number): number => { return Math.abs(Math.sin(x / 50)) * 100 },
                         speed: 0.2,
                         enemiesArray: [
-                            { dimensions: { width: 40, height: 40 }, hp: 3, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
-                            { dimensions: { width: 40, height: 40 }, hp: 4, position: { x: this.canvas.width - 90, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
-                            { dimensions: { width: 40, height: 40 }, hp: 3, position: { x: this.canvas.width - 140, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" }
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 40, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 90, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" },
+                            { dimensions: { width: 40, height: 40 }, hp: 6, position: { x: this.canvas.width - 140, y: 40 }, ctx: this.context, attack: { delay: 1000, projectilesArray: [] }, isDropping: { addHp: 0, addFireMode: null, image: "hpek" }, image: "enemy" }
                         ]
                     },
                     {

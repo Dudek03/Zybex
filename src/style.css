@@ -11,6 +11,10 @@
   font-family: "atari";
 }
 
+body {
+  background-color: black;
+}
+
 #main-canvas {
   border: 1px solid black;
 }
@@ -19,6 +23,7 @@
   background-color: black;
   color: white;
   font-size: 2rem;
+  border-bottom: 2px solid gray;
 }
 
 #topBar {
